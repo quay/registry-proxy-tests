@@ -2,7 +2,7 @@
 
 # AppSRE team CD
 
-IMAGE_NAME="quay.io/app-sre/registry-proxy-test"
+IMAGE_NAME="quay.io/app-sre/registry-proxy-tests"
 GIT_HASH=$(git rev-parse --short=7 HEAD)
 
 docker build -t "${IMAGE_NAME}:latest" .
