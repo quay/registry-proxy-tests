@@ -20,7 +20,6 @@ objects:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            allowPrivilegeEscalation: true
           env:
             - name: HOST
               value: ${HOST}
