@@ -1,0 +1,58 @@
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: registry-proxy-acceptance
+objects:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: registry-proxy-acceptance-job
+  spec:
+    backoffLimit: 5
+    template:
+      spec:
+        restartPolicy: Never
+        containers:
+        - name: registry-proxy-test
+          image: ${IMAGE}
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: true
+          env:
+            - name: HOST
+              value: ${HOST}
+            - name: IMAGE
+              value: ${TEST_IMAGE}
+            - name: TAG
+              value: ${TAG}
+            - name: REGISTRY_USERNAME
+              value: ${REGISTRY_USERNAME}
+            - name: REGISTRY_PASSWORD
+              value: ${REGISTRY_PASSWORD}
+            - name: SIGSTORE_PATH
+              value: ${SIGSTORE_PATH}
+parameters:
+  - name: IMAGE
+    description: container image of acceptance tests
+    value: "quay.io/marckok/registry-proxy-test:latest"
+  - name: HOST
+    description: host to run acceptance test against
+    value: "registry.stage.redhat.io"
+  - name: TEST_IMAGE
+    description: image to run acceptance test against
+    value: "ubi9/ubi"
+  - name: TAG
+    description: image tag to run acceptance test against
+    value: "9.5"
+  - name: REGISTRY_USERNAME
+    description: username to login to registry
+    value: ""
+  - name: REGISTRY_PASSWORD
+    description: password to login to registry
+    value: ""
+  - name: SIGSTORE_PATH
+    description: path for sigstore validation request
+    value: "redhat/community-operator-index@sha256=637bf3e5b650053af96f32a4e43f9f2636c13c36c63538c330164cec6aacfd7a/signature-1"
