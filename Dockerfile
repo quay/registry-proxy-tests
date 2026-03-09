@@ -1,4 +1,15 @@
-FROM quay.io/podman/stable
+FROM registry.access.redhat.com/ubi9/ubi
+
+RUN dnf install -y podman fuse-overlayfs && dnf clean all
+
+LABEL com.redhat.component="registry-proxy-tests" \
+      description="Registry proxy test suite for Quay.io" \
+      distribution-scope="public" \
+      io.k8s.description="Registry proxy test suite for Quay.io" \
+      release="1" \
+      url="https://github.com/quay/registry-proxy-tests" \
+      vendor="Red Hat, Inc." \
+      name="registry-proxy-tests"
 
 # Copy the test script
 COPY test-sigstore.sh /test-sigstore.sh
