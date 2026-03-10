@@ -1,6 +1,4 @@
-FROM registry.access.redhat.com/ubi9/ubi
-
-RUN dnf install -y podman fuse-overlayfs && dnf clean all
+FROM registry.redhat.io/ubi9/podman:9.7
 
 LABEL com.redhat.component="registry-proxy-tests" \
       description="Registry proxy test suite for Quay.io" \
