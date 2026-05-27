@@ -9,6 +9,10 @@ LABEL com.redhat.component="registry-proxy-tests" \
       vendor="Red Hat, Inc." \
       name="registry-proxy-tests"
 
+ENV HOME=/home/podman
+RUN mkdir -p /home/podman/.config/containers && \
+    chmod -R 777 /home/podman
+
 # Copy the test script
 COPY test-sigstore.sh /test-sigstore.sh
 RUN chmod +x /test-sigstore.sh
