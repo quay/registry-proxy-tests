@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/podman:9.7@sha256:a76afbb18be20eaf4243db66aab548c67871c422dcc864cc3cb9cebde485fbd5
+FROM registry.redhat.io/ubi9/podman:9.8-1790645735@sha256:e17e8d9baea9b9119f4cf4cbdaebb6a1d2b1cbc2a69af0b8c2e1ce270362ff26
 
 LABEL com.redhat.component="registry-proxy-tests" \
       description="Registry proxy test suite for Quay.io" \
